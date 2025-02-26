@@ -114,6 +114,7 @@ List<pw.Widget> _convertMarkdownAstToPdf(
                 node.textContent,
                 style: pw.TextStyle(
                   font: fonts?["regular"],
+                  fontNormal: fonts?["regular"],
                   fontBold: fonts?["bold"],
                   fontItalic: fonts?["italic"],
                   fontBoldItalic: fonts?["italic"],
@@ -146,6 +147,7 @@ List<pw.Widget> _convertMarkdownAstToPdf(
                       "${index++}. ${li.textContent}",
                       style: pw.TextStyle(
                         font: fonts?["regular"],
+                        fontNormal: fonts?["regular"],
                         fontBold: fonts?["bold"],
                         fontItalic: fonts?["italic"],
                         fontBoldItalic: fonts?["italic"],
@@ -186,6 +188,7 @@ List<pw.Widget> _convertMarkdownAstToPdf(
         pw.Text(
           node.text,
           style: pw.TextStyle(
+            fontNormal: fonts?["regular"],
             font: fonts?["regular"],
             fontBold: fonts?["bold"],
             fontItalic: fonts?["italic"],
@@ -256,6 +259,7 @@ List<pw.InlineSpan> _parseMarkdownText(
           style = pw.TextStyle(
             fontWeight: pw.FontWeight.bold,
             font: fonts?["regular"],
+            fontNormal: fonts?["regular"],
             fontBold: fonts?["bold"],
             fontItalic: fonts?["italic"],
             fontBoldItalic: fonts?["italic"],
@@ -264,6 +268,7 @@ List<pw.InlineSpan> _parseMarkdownText(
           style = pw.TextStyle(
             fontStyle: pw.FontStyle.italic,
             font: fonts?["regular"],
+            fontNormal: fonts?["regular"],
             fontBold: fonts?["bold"],
             fontItalic: fonts?["italic"],
             fontBoldItalic: fonts?["italic"],
@@ -299,6 +304,7 @@ pw.Widget _convertListItem(
                     li.textContent,
                     style: pw.TextStyle(
                       font: fonts?["regular"],
+                      fontNormal: fonts?["regular"],
                       fontBold: fonts?["bold"],
                       fontItalic: fonts?["italic"],
                       fontBoldItalic: fonts?["italic"],
@@ -314,6 +320,7 @@ pw.Widget _convertListItem(
               child.textContent,
               style: pw.TextStyle(
                 font: fonts?["regular"],
+                fontNormal: fonts?["regular"],
                 fontBold: fonts?["bold"],
                 fontItalic: fonts?["italic"],
                 fontBoldItalic: fonts?["italic"],
@@ -333,6 +340,7 @@ pw.Widget _convertListItem(
           "   ${index + 1}. ",
           style: pw.TextStyle(
             font: fonts?["regular"],
+            fontNormal: fonts?["regular"],
             fontBold: fonts?["bold"],
             fontItalic: fonts?["italic"],
             fontBoldItalic: fonts?["italic"],
