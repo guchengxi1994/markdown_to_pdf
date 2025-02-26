@@ -222,6 +222,8 @@ void main() async {
 
 ## 中文测试
 
+你好世界 ☄️
+
 Welcome to ChatGPT! Below is an example of a response with Markdown and LaTeX code.
 
 ## Markdown Example
@@ -294,11 +296,13 @@ Markdown and LaTeX can be powerful tools for formatting text and mathematical ex
 """;
 
   // await convertMarkdownToPdf(markdownText);
-  await Converter.loadRegularFont(
+  await Converter.loadFont(
     "/Users/guchengxi/Desktop/projects/ai_text_editor/assets/fonts/SourceHanSansCN-Regular.ttf",
+    (f) => Converter.regularFont = f,
   );
-  await Converter.loadBoldFont(
+  await Converter.loadFont(
     "/Users/guchengxi/Desktop/projects/ai_text_editor/assets/fonts/SourceHanSansCN-Bold.ttf",
+    (f) => Converter.boldFont = f,
   );
 
   final doc = await Converter.convert(markdownText);
