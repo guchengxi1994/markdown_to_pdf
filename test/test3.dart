@@ -1,7 +1,8 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:markdown/markdown.dart' as md;
+import 'package:markdown_to_pdf/markdown_to_pdf.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:collection/collection.dart';
@@ -219,6 +220,8 @@ void main() async {
   String markdownText = """
 # ChatGPT Response
 
+## 中文测试
+
 Welcome to ChatGPT! Below is an example of a response with Markdown and LaTeX code.
 
 ## Markdown Example
@@ -290,5 +293,16 @@ Here is an italic example: *This text is italicized*.
 Markdown and LaTeX can be powerful tools for formatting text and mathematical expressions in your Flutter app.
 """;
 
-  await convertMarkdownToPdf(markdownText);
+  // await convertMarkdownToPdf(markdownText);
+  await Converter.loadRegularFont(
+    "/Users/guchengxi/Desktop/projects/ai_text_editor/assets/fonts/SourceHanSansCN-Regular.ttf",
+  );
+  await Converter.loadBoldFont(
+    "/Users/guchengxi/Desktop/projects/ai_text_editor/assets/fonts/SourceHanSansCN-Bold.ttf",
+  );
+
+  final doc = await Converter.convert(markdownText);
+
+  final file = File("output.pdf");
+  await file.writeAsBytes(await doc.save());
 }
