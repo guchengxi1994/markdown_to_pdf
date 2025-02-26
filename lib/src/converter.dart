@@ -121,20 +121,39 @@ pw.Widget _buildStyledText(md.Element element) {
 }
 
 List<pw.InlineSpan> _parseMarkdownText(List<md.Node> nodes) {
-  return nodes.map((node) {
+  List<pw.InlineSpan> spans = [];
+
+  for (var node in nodes) {
     if (node is md.Text) {
-      return pw.TextSpan(text: node.text, style: _defaultTextStyle());
+      spans.add(pw.TextSpan(text: node.text, style: _defaultTextStyle()));
     } else if (node is md.Element) {
-      var style = _defaultTextStyle();
-      if (node.tag == 'strong') {
-        style = style.copyWith(fontWeight: pw.FontWeight.bold);
-      } else if (node.tag == 'em') {
-        style = style.copyWith(fontStyle: pw.FontStyle.italic);
+      if (node.tag == 'img') {
+        String? src = node.attributes['src'];
+        if (src != null) {
+          try {
+            final img = _convertImage(src);
+            if (img != null) {
+              spans.add(pw.WidgetSpan(child: img));
+            }
+          } catch (e) {
+            spans.add(pw.TextSpan(text: '[Invalid Image]'));
+          }
+        }
+      } else {
+        // 处理加粗、斜体等样式
+        pw.TextStyle style = pw.TextStyle();
+
+        if (node.tag == 'strong') {
+          style = _defaultTextStyle().copyWith(fontWeight: pw.FontWeight.bold);
+        } else if (node.tag == 'em') {
+          style = _defaultTextStyle().copyWith(fontStyle: pw.FontStyle.italic);
+        }
+
+        spans.add(pw.TextSpan(text: node.textContent, style: style));
       }
-      return pw.TextSpan(text: node.textContent, style: style);
     }
-    return const pw.TextSpan(text: '');
-  }).toList();
+  }
+  return spans;
 }
 
 pw.Widget _convertListItem(md.Node node) {
