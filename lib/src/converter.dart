@@ -17,6 +17,7 @@ class Converter {
   static pw.Font? regularFont;
   static pw.Font? boldFont;
   static pw.Font? italicFont;
+  static List<pw.Font> extra = [];
 
   static Future<void> loadFont(String path, Function(pw.Font) setter) async {
     final fontBytes = await File(path).readAsBytes();
@@ -205,6 +206,7 @@ pw.TextStyle _defaultTextStyle() {
           Converter.regularFont,
           Converter.boldFont,
           Converter.italicFont,
+          ...Converter.extra,
         ].where((font) => font != null).cast<pw.Font>().toList(),
   );
 }
